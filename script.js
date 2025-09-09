@@ -1,5 +1,5 @@
 let currentSlide = 0;
-const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg"];
+const photos = ["image/photo1.jpg", "image/photo2.jpg", "image/photo3.jpg"];
 const slideshow = document.getElementById("slideshow");
 
 // Countdown Logic
