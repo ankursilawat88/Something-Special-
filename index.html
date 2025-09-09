@@ -1,254 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Anniversary</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-
-    .countdown-container {
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .countdown-timer {
-      font-size: 3rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      display: inline-block;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .gallery img {
-      max-width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.6);
-      transition: transform 0.3s ease;
-      opacity: 0;
-    }
-
-    .gallery img.visible {
-      opacity: 1;
-      animation: fadeInUp 1.5s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .letter {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 25px;
-      border-radius: 15px;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      min-height: 200px;
-      white-space: pre-wrap;
-    }
-
-    .typing {
-      border-right: 2px solid white;
-      animation: blink 0.7s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      0%, 50%, 100% { border-color: white; }
-      25%, 75% { border-color: transparent; }
-    }
-
-    .final-message {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    footer {
-      background-color: #6f42c1;
-      text-align: center;
-      padding: 1rem;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-
-    .heart {
-      position: absolute;
-      top: -10px;
-      color: #ff4f81;
-      font-size: 20px;
-      animation: fall 6s linear infinite;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Anniversary - Final Improved</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--pink:#ff4081;--purple:#8e44ad;--gold:#ffb347;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Poppins',sans-serif;background:#090012;color:#fff;overflow:hidden}
+  .center{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px}
+  button{background:var(--pink);color:#fff;border:none;padding:12px 22px;border-radius:28px;font-size:18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.4);transition:transform .18s,box-shadow .18s}
+  button:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  /* animated gradient */
+  .animated-bg{background:linear-gradient(270deg,var(--pink),var(--purple),var(--gold));background-size:600% 600%;animation:grad 12s ease infinite}
+  @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  /* countdown style */
+  .countdown-box{font-size:46px;font-weight:700;padding:30px 40px;border-radius:18px;background:rgba(255,255,255,0.06);backdrop-filter:blur(4px);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  .countdown-num{display:inline-block;padding:6px 14px;border-radius:12px;background:rgba(0,0,0,0.25);margin:0 8px;min-width:68px}
+  .glow{text-shadow:0 0 18px rgba(255,64,129,0.8);}
+  /* floating hearts */
+  .heart{position:absolute;top:100%;font-size:20px;opacity:0.9;animation:rise 5s linear infinite}
+  @keyframes rise{0%{transform:translateY(0) scale(0.8);opacity:1}100%{transform:translateY(-140vh) scale(1.2);opacity:0}}
+  /* wish page */
+  #wishPage h1{font-size:36px;margin:10px 0}
+  #wishPage h2{font-size:20px;margin:6px 0;opacity:0.95}
+  .floating-word{position:absolute;font-size:18px;opacity:0.0;animation:floatword 6s ease-in-out infinite}
+  @keyframes floatword{0%{transform:translateY(20px);opacity:0}10%{opacity:1}40%{opacity:1;transform:translateY(-10px)}80%{opacity:0}100%{opacity:0}}
+  /* photos */
+  #slideshow{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}
+  #slideshow img{width:280px;height:200px;object-fit:cover;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.6);transform:scale(.96);transition:transform .5s,opacity .6s;opacity:0}
+  #slideshow img.visible{opacity:1;transform:scale(1)}
+  /* letter */
+  .letter-box{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));padding:26px;border-radius:14px;max-width:760px;margin:0 auto;font-size:18px;color:#fff}
+  /* final */
+  .final-text{font-size:48px;color:var(--pink);letter-spacing:2px;text-shadow:0 0 18px rgba(255,64,129,0.9)}
+  /* responsive */
+  @media(max-width:700px){.countdown-box{font-size:30px}.final-text{font-size:34px}#slideshow img{width:90%;height:auto}}
+</style>
 </head>
-
 <body>
-  <audio autoplay loop muted>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
 
-  <header class="animate__animated animate__fadeInDown">Our Beautiful Journey Together</header>
+<!-- background music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" style="position:fixed;right:18px;bottom:18px;padding:10px 14px;border-radius:999px;z-index:1200">Play ▶</button>
 
-  <div id="countdownPage" class="container text-center animate__animated animate__fadeIn">
-    <div class="countdown-container">
-      <h2>Countdown to Midnight 🎇</h2>
-      <div id="countdown" class="countdown-timer">00d 00h 00m 00s</div>
+<!-- Countdown Page -->
+<section id="countdownPage" class="animated-bg">
+  <div class="center">
+    <h1 class="glow">Our Special Moment Starts In</h1>
+    <div class="countdown-box" id="countdownBox" aria-live="polite">
+      <span class="countdown-num" id="cSeconds">10s</span>
     </div>
+    <p style="margin-top:18px;opacity:0.9">Get ready — tap the screen or wait for the surprise ✨</p>
   </div>
+</section>
 
-  <div id="wishPage" class="container text-center hidden animate__animated animate__fadeIn">
-    <h2 class="animate__animated animate__fadeInUp animate__delay-1s">🎉 Happy 1st Meeting Anniversary My Jaana ❤️ 🎉</h2>
-    <p class="mt-3 animate__animated animate__fadeInUp animate__delay-2s">  </p>
-    <button class="btn btn-primary btn-lg mt-4 animate__animated animate__fadeInUp animate__delay-3s" onclick="showPhotos()">See Our Moments</button>
+<!-- Wish Page (hidden initially) -->
+<section id="wishPage" class="hidden animated-bg" aria-hidden="true">
+  <div class="center">
+    <h1 id="wishMain" class="glow">🎉 Happy 1st Meeting Anniversary My Jaana ❤️ 🎉</h1>
+    <h2 id="wishSub">Thank you for making my life magical ✨</h2>
+    <div style="height:18px"></div>
+    <button id="seeMomentsBtn">See More Moments</button>
   </div>
+  <!-- floating short words -->
+  <div class="floating-word" style="left:10%;animation-delay:0s">Forever Yours ❤️</div>
+  <div class="floating-word" style="left:70%;top:40%;animation-delay:2s">Our Journey Begins ✨</div>
+  <div class="floating-word" style="left:30%;top:70%;animation-delay:4s">Love You Always 💖</div>
+</section>
 
-  <div id="photosPage" class="container text-center hidden animate__animated animate__fadeIn">
-    <h2>Our Precious Memories 📸</h2>
-    <div class="row g-4 gallery mt-3">
-      <div class="col-md-4">
-        <img src="photo1.jpg" alt="Memory 1">
-      </div>
-      <div class="col-md-4">
-        <img src="photo2.jpg" alt="Memory 2">
-      </div>
-      <div class="col-md-4">
-        <img src="photo3.jpg" alt="Memory 3">
-      </div>
+<!-- Photos Page -->
+<section id="photosPage" class="hidden" aria-hidden="true">
+  <div class="center">
+    <h1>Our Beautiful Moments 📸</h1>
+    <div id="slideshow" aria-live="polite">
+      <img src="photo1.jpg" id="p1" alt="Moment 1">
+      <img src="photo2.jpg" id="p2" alt="Moment 2">
+      <img src="photo3.jpg" id="p3" alt="Moment 3">
     </div>
-    <button class="btn btn-success btn-lg mt-4" onclick="showLetter()">Read My Heart</button>
+    <div style="height:18px"></div>
+    <button id="oneLastBtn">One Last Thing</button>
   </div>
+</section>
 
-  <div id="letterPage" class="container text-center hidden animate__animated animate__fadeIn">
-    <h2>💌 A Letter For My Love 💌</h2>
-    <div class="letter mt-3" id="typingLetter"></div>
-    <button class="btn btn-warning btn-lg mt-4" onclick="showFinalPage()">See My Surprise</button>
+<!-- Letter Page -->
+<section id="letterPage" class="hidden" aria-hidden="true">
+  <div class="center">
+    <h1>💌 A Letter For You 💌</h1>
+    <div class="letter-box" id="letterBox" aria-live="polite"></div>
   </div>
+</section>
 
-  <div id="finalPage" class="container text-center hidden animate__animated animate__fadeIn">
-    <h2 class="final-message">🌟 Thank You for Being My Everything 🌟</h2>
-    <p class="mt-3">Here's to endless love, laughter, and memories together ❤️</p>
+<!-- Final Page -->
+<section id="finalPage" class="hidden" aria-hidden="true">
+  <div class="center">
+    <div class="final-text">I Love You Forever ❤️</div>
+    <p style="margin-top:14px;opacity:0.9">Thank you for every moment we've shared.</p>
   </div>
+</section>
 
-  <footer>&copy; 2025 Cherished Moments</footer>
+<script>
+/* Play music control */
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+musicBtn.addEventListener('click', ()=>{
+  if(music.paused){ music.play(); musicBtn.innerText='Pause ⏸'; }
+  else { music.pause(); musicBtn.innerText='Play ▶'; }
+});
+setTimeout(()=>{ music.play().then(()=>{ musicBtn.innerText='Pause ⏸'; }).catch(()=>{}); },500);
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    let target = new Date("September 9, 2025 00:00:00 GMT+0530").getTime();
+/* 10 second countdown (demo) */
+let countdown = 10;
+const cSeconds = document.getElementById('cSeconds');
+const countdownPage = document.getElementById('countdownPage');
+const wishPage = document.getElementById('wishPage');
+const photosPage = document.getElementById('photosPage');
+const letterPage = document.getElementById('letterPage');
+const finalPage = document.getElementById('finalPage');
+let countdownInterval = setInterval(()=>{
+  countdown--;
+  if(countdown<=0){
+    cSeconds.innerText = '0s';
+    clearInterval(countdownInterval);
+    /* transition to wish page */
+    countdownPage.classList.add('hidden'); countdownPage.setAttribute('aria-hidden','true');
+    wishPage.classList.remove('hidden'); wishPage.setAttribute('aria-hidden','false');
+  } else {
+    cSeconds.innerText = countdown + 's';
+  }
+},1000);
 
-    function updateCountdown() {
-      let now = new Date().getTime();
-      let diff = target - now;
+/* allow immediate skip by tapping anywhere on countdown page */
+countdownPage.addEventListener('click', ()=>{
+  clearInterval(countdownInterval);
+  countdownPage.classList.add('hidden'); countdownPage.setAttribute('aria-hidden','true');
+  wishPage.classList.remove('hidden'); wishPage.setAttribute('aria-hidden','false');
+});
 
-      if (diff <= 0) {
-        document.getElementById("countdownPage").classList.add("hidden");
-        document.getElementById("wishPage").classList.remove("hidden");
-      } else {
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        let secs = Math.floor((diff % (1000 * 60)) / 1000);
+/* one-way navigation: remove previous sections when moving forward */
+function goTo(next){ 
+  [countdownPage, wishPage, photosPage, letterPage, finalPage].forEach(s=>{
+    if(s && !s.classList.contains('hidden')){ s.classList.add('hidden'); s.setAttribute('aria-hidden','true'); s.remove(); }
+  });
+  const target = document.getElementById(next);
+  if(target){
+    document.body.appendChild(target);
+    target.classList.remove('hidden');
+    target.setAttribute('aria-hidden','false');
+  }
+}
 
-        document.getElementById("countdown").innerText =
-          days + "d " + hours + "h " + mins + "m " + secs + "s";
-      }
+/* Wish -> Photos */
+document.getElementById('seeMomentsBtn').addEventListener('click', ()=>{
+  goTo('photosPage');
+  setTimeout(()=>{ document.getElementById('p1').classList.add('visible'); },200);
+  setTimeout(()=>{ document.getElementById('p2').classList.add('visible'); },700);
+  setTimeout(()=>{ document.getElementById('p3').classList.add('visible'); },1200);
+});
+
+/* Photos -> Letter */
+document.getElementById('oneLastBtn').addEventListener('click', ()=>{
+  goTo('letterPage');
+  typeLetter();
+  setTimeout(()=>{ goTo('finalPage'); }, 7000);
+});
+
+/* Typewriter for letter */
+const letterText = `umm Hello meri Jaan sbse pehle toh mera bacha happy anniversary and I love you soo soo much meri jaan i don't know ki itna jldi humari Anniversary aa gai pta hi ni chala ki humari meeting ko 2 saal ho chuke hai but still wo memories ek dm new jesi hai or mai aaj tk or future me kbh bhi humari ye pehli meeting kbhi bhi ni bhool paunga or na kbhi bhulna chahunga meri jaana jo jo bhi uss din feel kiya kaafi zyada accha tha bhut bhut zyada tumhara woh jis treeke se tum entery liye se leke tumhare jane tk ka poora time itnaa zyada haseen tha ki kya hi bolu mai mere words km pad jayege unn moments ko bare me batane me... and mai kaafi wish krta hu ki hum kbhi wps se mile hume woh moka mile ye sare moment recreate krne ka tumhare sath dubara time spend krne ka i really wanna meet you again n again and live with you forever i love you soo much meri jaan mera kuchupuchu mera baccha my sweetheart and i always will i love uh and Again Happy Anniversary Meri Jaan...❤️\n\nForever Yours,\nAnkur`;
+function typeLetter(){
+  const box = document.getElementById('letterBox');
+  box.innerHTML='';
+  let i=0;
+  function step(){
+    if(i<letterText.length){
+      let ch = letterText.charAt(i);
+      if(ch === '\n'){ box.innerHTML += '<br/>'; }
+      else { box.innerHTML += ch.replace(/ /g, '&nbsp;'); }
+      i++;
+      setTimeout(step, 35);
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    function showPhotos() {
-      document.getElementById("countdownPage").classList.add("hidden");
-      document.getElementById("wishPage").classList.add("hidden");
-      document.getElementById("photosPage").classList.remove("hidden");
-      revealGalleryImages();
-    }
-
-    function showLetter() {
-      document.getElementById("photosPage").classList.add("hidden");
-      document.getElementById("letterPage").classList.remove("hidden");
-      typeLetter();
-    }
-
-    function showFinalPage() {
-      document.getElementById("letterPage").classList.add("hidden");
-      document.getElementById("finalPage").classList.remove("hidden");
-    }
-
-    function revealGalleryImages() {
-      document.querySelectorAll('.gallery img').forEach((img, index) => {
-        setTimeout(() => {
-          img.classList.add('visible');
-        }, index * 500);
-      });
-    }
-
-    function typeLetter() {
-      const letterText = "umm Hello meri Jaan sbse pehle toh mera bacha happy anniversary and I love you soo soo much meri jaan i don't know ki itna jldi humari Anniversary aa gai pta hi ni chala ki humari meeting ko 2 saal ho chuke hai but still wo memories ek dm new jesi hai or mai aaj tk or future me kbh bhi humari ye pehli meeting kbhi bhi ni bhool paunga or na kbhi bhulna chahunga meri jaana jo jo bhi uss din feel kiya kaafi zyada accha tha bhut bhut zyada tumhara woh jis treeke se tum entery liye se leke tumhare jane tk ka poora time itnaa zyada haseen tha ki kya hi bolu mai mere words km pad jayege unn moments ko bare me batane me... and mai kaafi wish krta hu ki hum kbhi wps se mile hume woh moka mile ye sare moment recreate krne ka tumhare sath dubara time spend krne ka i really wanna meet you again n again and live with you forever i love you soo much meri jaan mera kuchupuchu mera baccha my sweetheart and i always will i love uh and Again Happy Anniversary Meri Jaan...❤️\n\nForever Yours,\nAnkur";
-      const container = document.getElementById('typingLetter');
-      container.textContent = '';
-
-      let index = 0;
-      function type() {
-        if (index < letterText.length) {
-          container.textContent += letterText.charAt(index);
-          container.classList.add('typing');
-          index++;
-          setTimeout(type, 50);
-        } else {
-          container.classList.remove('typing');
-        }
-      }
-      type();
-    }
-
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerText = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 15 + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => { heart.remove(); }, 6000);
-    }
-    setInterval(createHeart, 500);
-  </script>
+  }
+  step();
+}
+</script>
 </body>
-
 </html>
-
-
