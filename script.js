@@ -1,61 +1,70 @@
-let currentSlide = 0;
-const photos = ["images/photo1.jpg","images/photo2.jpg","images/photo3.jpg"];
-const slideshow = document.getElementById("slideshow");
-const music = document.getElementById("bg-music");
-
-// Countdown
-let timeLeft = 10;
-const countdownEl = document.getElementById("countdown");
-const timer = setInterval(() => {
-  timeLeft--;
-  countdownEl.textContent = timeLeft;
-  if(timeLeft<=0){
-    clearInterval(timer);
-    showPage("wishPage");
-    playMusic();
-  }
-},1000);
-
-// Page Navigation
-function showPage(pageId){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(pageId).classList.add("active");
-
-  if(pageId==="photosPage") startSlideshow();
-  if(pageId==="letterPage") typeLetter();
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color: #fff;
+  text-align: center;
 }
 
-// Slideshow
-function startSlideshow(){
-  setInterval(()=>{
-    currentSlide = (currentSlide+1)%photos.length;
-    slideshow.src = photos[currentSlide];
-  },2500);
+.page {
+  display: none;
+  padding: 50px;
 }
 
-// Letter Typing
-const letter = `umm Hello meri Jaan sbse pehle toh mera bacha happy anniversary and I love you soo soo much meri jaan i don't know ki itna jldi humari Anniversary aa gai pta hi ni chala ki humari meeting ko 2 saal ho chuke hai but still wo memories ek dm new jesi hai or mai aaj tk or future me kbh bhi humari ye pehli meeting kbhi bhi ni bhool paunga or na kbhi bhulna chahunga meri jaana my Love, thank you for being the most beautiful part of my life. This journey with you has been nothing less than magical, and I promise to hold your hand forever ❤️.`;
-let index = 0;
-function typeLetter(){
-  const textEl = document.getElementById("letterText");
-  textEl.textContent = "";
-  index = 0;
-  const typer = setInterval(()=>{
-    if(index<letter.length){
-      textEl.textContent+=letter.charAt(index);
-      index++;
-    }else{
-      clearInterval(typer);
-    }
-  },50);
+.page.active {
+  display: block;
 }
 
-// Music play after countdown
-function playMusic(){
-  music.volume=0.5;
-  music.play().catch(()=>{
-    document.body.addEventListener("click",()=>{
-      music.play();
-    },{once:true});
-  });
+button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  color: #ff4e50;
+  font-weight: bold;
+}
+
+/* Letter Page Layout */
+.letter-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 80%;
+  margin: auto;
+}
+
+.letter-photos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.letter-photos img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.letter-text-container {
+  flex: 1;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #fff;
+  min-height: 300px;
+}
+
+#slideshow {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
