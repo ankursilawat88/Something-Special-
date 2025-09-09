@@ -33,7 +33,7 @@ function startSlideshow() {
 }
 
 // Letter Typing
-const letter = "My Love, thank you for being the most beautiful part of my life. This journey with you has been nothing less than magical, and I promise to hold your hand forever ❤️.";
+const letter = "umm Hello meri Jaan sbse pehle toh mera bacha happy anniversary and I love you soo soo much meri jaan i don't know ki itna jldi humari Anniversary aa gai pta hi ni chala ki humari meeting ko 2 saal ho chuke hai but still wo memories ek dm new jesi hai or mai aaj tk or future me kbh bhi humari ye pehli meeting kbhi bhi ni bhool paunga or na kbhi bhulna chahunga meri jaana my Love, thank you for being the most beautiful part of my life. This journey with you has been nothing less than magical, and I promise to hold your hand forever ❤️.";
 let index = 0;
 function typeLetter() {
   const textEl = document.getElementById("letterText");
